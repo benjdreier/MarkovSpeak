@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Random Text Generator</title>
+</head>
+
+<body>
+<script src='markov.js'></script>
+<script src='defaults.js' charset="UTF-8"></script>
+
+<h1>Random Text Generator</h1>
+
+Paste in some text, or select a built-in option<br>
+<form name="inputForm" style="margin:0">
+	<input type="radio" value=0 name="inputRadios"> Shakespeare
+	<input type="radio" value=1 name="inputRadios"> Trump
+	<input type="radio" value=2 name="inputRadios"> Bershtein
+</form>
+<script>
+	var rad = document.inputForm.inputRadios;
+	for(var i = 0; i < rad.length; i++) {
+	    rad[i].onclick = function() {
+	    	console.log(this.value);
+	        document.getElementById("inputText").value = DEFAULT_VALUES[this.value];
+	    };
+	}
+</script>
+
+
+<br>
+<textarea cols=60 rows=15 id="inputText"></textarea><br>
+
+<table>
+	<td>
+		Depth: <input type="text" size=3 value="4" id="depthLabel"><br>
+		<input type="range" min=1 max=10 value="4" onChange="updateDepthLabel(this.value);" id="depthSlider">
+	</td>
+	<td>
+		Length (In chars or words) <br>
+		<input type="text" value="1000" id="lengthInput">
+	</td>
+	<td>
+		Seperate by:<br>
+		<input type="radio" name="type" id="charRadio" checked> Characters
+		<input type="radio" name="type" id="wordRadio"> Words
+	</td>
+	<td>
+		Ignore line breaks? <br>
+		<input type="checkbox" id="ignoreLinesCheck">
+	</td>
+</table>
+
+<script>
+	function updateDepthLabel(value){
+		document.getElementById("depthLabel").value = value;
+	}
+</script>
+
+<br>
+<button onclick="doSubmit();">Generate Text</button>
+
+<div id="outputPane">
+	
+</div>
+
+<div style="position: fixed; bottom:5px; right:5px">Created by <a href="https://www.linkedin.com/in/benjamin-dreier-410197144/">Ben Dreier</a></div>
+
+</body>
+</html>
